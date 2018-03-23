@@ -26,8 +26,8 @@
 #include "syscall.h"
 #include "thread.h"
 
-void yield(); \\This the yield function called by the exception handler which
-              \\calls a thread yield
+void yield(); //This the yield function called by the exception handler which
+              //calls a thread yield
 
 //----------------------------------------------------------------------
 // ExceptionHandler
