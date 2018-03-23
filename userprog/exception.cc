@@ -65,6 +65,7 @@ ExceptionHandler(ExceptionType which)
     else if ((which == SyscallException) && (type == SC_Yield)) {
       DEBUG('a', "Yield, initiated by user program.\n");
       yield();
+      machine->WriteRegister(PCReg, 4);
     }
 
     else {
@@ -77,4 +78,5 @@ ExceptionHandler(ExceptionType which)
 
 void yield(){
   currentThread->Yield();
+  printf("the current process yielded\n");
 }
