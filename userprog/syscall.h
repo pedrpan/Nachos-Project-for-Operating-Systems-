@@ -29,6 +29,7 @@
 #define SC_Close	8
 #define SC_Fork		9
 #define SC_Yield	10
+#define SC_Kill 	11 //this system call code was not defined so we made it 
 
 #ifndef IN_ASM
 
@@ -122,7 +123,9 @@ void Fork(void (*func)());
 /* Yield the CPU to another runnable thread, whether in this address space 
  * or not. 
  */
-void Yield();		
+void Yield();	
+
+int Kill(int pid);	
 
 #endif /* IN_ASM */
 
