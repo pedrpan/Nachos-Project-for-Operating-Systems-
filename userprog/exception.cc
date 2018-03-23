@@ -28,9 +28,10 @@
 
 void yield(); //This the yield function called by the exception handler which
 void fork();               //calls a thread yield
-void exxit(); 
-void exec(); 
-void kill(); 
+void exxit();
+void exec();
+void kill();
+void join();
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -69,37 +70,37 @@ ExceptionHandler(ExceptionType which)
       DEBUG('a', "Yield, initiated by user program.\n");
       yield();
       machine->WriteRegister(PCReg, 4); //we must update the registers or we
-    }                                   //will end up in an endless loop 
+    }                                   //will end up in an endless loop
 
     else if ((which == SyscallException) && (type == SC_Fork)) {
       DEBUG('a', "Fork, initiated by user program.\n");
       fork();
-      machine->WriteRegister(PCReg, 4); 
-    }    
+      machine->WriteRegister(PCReg, 4);
+    }
 
     else if ((which == SyscallException) && (type == SC_Exit)) {
       DEBUG('a', "Exit, initiated by user program.\n");
       exxit();
-      machine->WriteRegister(PCReg, 4); 
-    }                                   
-                               
+      machine->WriteRegister(PCReg, 4);
+    }
+
     else if ((which == SyscallException) && (type == SC_Exec)) {
       DEBUG('a', "Exec, initiated by user program.\n");
-      exec(); 
-      machine->WriteRegister(PCReg, 4); 
-    }    
+      exec();
+      machine->WriteRegister(PCReg, 4);
+    }
 
     else if ((which == SyscallException) && (type == SC_Kill)) {
       DEBUG('a', "Kill, initiated by user program.\n");
-      kill(); 
-      machine->WriteRegister(PCReg, 4); 
-    }    
+      kill();
+      machine->WriteRegister(PCReg, 4);
+    }
 
     else if ((which == SyscallException) && (type == SC_Join)) {
       DEBUG('a', "Join, initiated by user program.\n");
-      join(); 
-      machine->WriteRegister(PCReg, 4); 
-    }    
+      join();
+      machine->WriteRegister(PCReg, 4);
+    }
 
 
 
