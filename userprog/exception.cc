@@ -27,7 +27,10 @@
 #include "thread.h"
 
 void yield(); //This the yield function called by the exception handler which
-              //calls a thread yield
+void fork();               //calls a thread yield
+void exxit(); 
+void exec(); 
+void kill(); 
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -68,6 +71,38 @@ ExceptionHandler(ExceptionType which)
       machine->WriteRegister(PCReg, 4); //we must update the registers or we
     }                                   //will end up in an endless loop 
 
+    else if ((which == SyscallException) && (type == SC_Fork)) {
+      DEBUG('a', "Fork, initiated by user program.\n");
+      fork();
+      machine->WriteRegister(PCReg, 4); 
+    }    
+
+    else if ((which == SyscallException) && (type == SC_Exit)) {
+      DEBUG('a', "Exit, initiated by user program.\n");
+      exxit();
+      machine->WriteRegister(PCReg, 4); 
+    }                                   
+                               
+    else if ((which == SyscallException) && (type == SC_Exec)) {
+      DEBUG('a', "Exec, initiated by user program.\n");
+      exec(); 
+      machine->WriteRegister(PCReg, 4); 
+    }    
+
+    else if ((which == SyscallException) && (type == SC_Kill)) {
+      DEBUG('a', "Kill, initiated by user program.\n");
+      kill(); 
+      machine->WriteRegister(PCReg, 4); 
+    }    
+
+    else if ((which == SyscallException) && (type == SC_Join)) {
+      DEBUG('a', "Join, initiated by user program.\n");
+      join(); 
+      machine->WriteRegister(PCReg, 4); 
+    }    
+
+
+
     else {
       printf("Unexpected user mode exception %d %d\n", which, type);
       ASSERT(FALSE);
@@ -79,4 +114,24 @@ ExceptionHandler(ExceptionType which)
 void yield(){
   currentThread->Yield();
   printf("the current process yielded\n");
+}
+
+void fork(){
+  printf("right now fork does nothing\n");
+}
+
+void exxit(){
+  printf("right now exxit does nothing\n");
+}
+
+void exec(){
+  printf("right now exec does nothing\n");
+}
+
+void kill(){
+  printf("right now kill does nothing\n");
+}
+
+void join(){
+  printf("right now join does nothing\n");
 }
