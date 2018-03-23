@@ -65,8 +65,8 @@ ExceptionHandler(ExceptionType which)
     else if ((which == SyscallException) && (type == SC_Yield)) {
       DEBUG('a', "Yield, initiated by user program.\n");
       yield();
-      machine->WriteRegister(PCReg, 4);
-    }
+      machine->WriteRegister(PCReg, 4); //we must update the registers or we
+    }                                   //will end up in an endless loop 
 
     else {
       printf("Unexpected user mode exception %d %d\n", which, type);
